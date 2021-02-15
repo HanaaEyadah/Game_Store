@@ -1,18 +1,22 @@
-.App {
+body {
+  background-color: rgb(160, 160, 160);
+}
+h1 {
+  text-align: center;
+}
+h4 {
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+img {
+  width: 550px;
+  height: 400px;
+  padding-bottom: 4cm;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  block-size: auto;
 }
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
