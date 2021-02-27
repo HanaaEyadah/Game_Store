@@ -1,22 +1,37 @@
 body {
-  background-color: rgb(160, 160, 160);
+  background-color: rgb(177, 177, 177);
 }
 h1 {
   text-align: center;
-}
-h4 {
-  text-align: center;
+  color: rgb(79, 24, 131);
 }
 
-img {
-  width: 550px;
-  height: 400px;
+#AppImg {
+  width: 350px;
+  height: 200px;
   padding-bottom: 4cm;
+  border-radius: 10px;
   display: block;
   margin-left: auto;
   margin-right: auto;
   block-size: auto;
 }
+
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
 .App-header {
   background-color: #282c34;
   min-height: 100vh;

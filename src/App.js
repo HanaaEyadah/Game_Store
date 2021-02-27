@@ -1,33 +1,80 @@
-import React from "react";
-import './App.css';
-import img from "./game.jpeg"
-import ReactDOM from 'react-dom';
-import { icons } from "react-icons";
+
+import { GlobalStyle, ThemeButton } from "./styles";
+import ProductList from "./components/ProductList";
+import Home from "./components/Home";
+import { ThemeProvider } from "styled-components";
+import { useState } from "react";
+import products from "./products"
+import ProductDetail from "./components/ProductDetails"
 
 
+const theme = {
+      light: {
+        mainColor: "#320145", // main font color
+        backgroundColor: "#bcaec2", // main background color
+        purple: "#66068a",
+      },
+      dark: {
+        mainColor: "#bcaec2", // main font color
+        backgroundColor: "#320145", // main background color
+        purple: "#66068a",
+      },
+    }
 
 function App() {
-  return (
-    <div>
+  const [currentTheme, setCurrentTheme] = useState("light");
+  const [product, setProduct] = useState(null);
+  const [_products, setProducts] = useState(products);
 
-
-   componentDidMount() {
-    document.title = 'Game_Store'
+  const deleteProduct = (productId) => {
+    const updatedProducts = _products.filter(
+      (product) => product.id !== +productId
+    );
+    setProducts(updatedProducts);
+    setProduct(null);
   };
-      <head>Game_Store</head>
-      <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico"/>
-       <h1>Game_Store</h1>
-    <h4>In my store you can find whatever you want in gaming world </h4>
-    <img
-        alt="Game Store"
-        src="https://www.logolynx.com/images/logolynx/d3/d3287bc5c651f738e1df7f42ac9f97c0.jpeg"
-    ></img>
-    </div>
+
+  const selectProduct = (productId) => {
+    const selectedProduct = products.find(
+      (product) => product.id === productId
+    );
+    setProduct(selectedProduct);
+  };
+
+  const toggleTheme = () =>
+    setCurrentTheme(currentTheme === "light" ? "dark" : "light");
+
+  const setView = () =>
+    product ? (
+      <ProductDetail
+        product={product}
+        deleteProduct={deleteProduct}
+        selectProduct={selectProduct}
+      />
+    ) : (
+      <ProductList
+        products={_products}
+        deleteProduct={deleteProduct}
+        selectProduct={selectProduct}
+      />
+    );
+
     
+
+  return (
+    <ThemeProvider theme={theme[currentTheme]}>
+          <GlobalStyle />
+          <ThemeButton onClick={toggleTheme}>Dark Mode</ThemeButton>
+          <Home />
+          {setView()}
+        </ThemeProvider>
   );
- 
-
-
 }
 
 export default App;
+
+
+
+
+
+
