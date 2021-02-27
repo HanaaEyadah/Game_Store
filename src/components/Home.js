@@ -5,11 +5,7 @@ const Home = () => {
   return (
     <>
       <Title>Game_Store</Title>
-      <ShopImage
-        alt="Game_Store"
-        src={img}
-      />
-      <Description>Our Best Seller</Description>
+      <ShopImage alt="Game_Store" src={img}/>
    
     </>
   );

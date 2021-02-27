@@ -1,77 +1,64 @@
-
-import { GlobalStyle, ThemeButton } from "./styles";
-import ProductList from "./components/ProductList";
+import React, { useState } from "react";
+import { Route, Switch } from "react-router";
+import { GlobalStyle } from "./styles";
 import Home from "./components/Home";
+import NavBar from "./components/NavBar";
+import ProductDetail from "./components/ProductDetails";
+import ProductList from "./components/ProductList";
 import { ThemeProvider } from "styled-components";
-import { useState } from "react";
-import products from "./products"
-import ProductDetail from "./components/ProductDetails"
-
+import productsData from "./products";
 
 const theme = {
-      light: {
-        mainColor: "#320145", // main font color
-        backgroundColor: "#bcaec2", // main background color
-        purple: "#66068a",
-      },
-      dark: {
-        mainColor: "#bcaec2", // main font color
-        backgroundColor: "#320145", // main background color
-        purple: "#66068a",
-      },
-    }
+        light: {
+          mainColor: "#320145", // main font color
+          backgroundColor: "#bcaec2", // main background color
+          purple: "#66068a",
+        },
+        dark: {
+          mainColor: "#bcaec2", // main font color
+          backgroundColor: "#320145", // main background color
+          purple: "#66068a",
+        },
+      }
 
 function App() {
   const [currentTheme, setCurrentTheme] = useState("light");
-  const [product, setProduct] = useState(null);
-  const [_products, setProducts] = useState(products);
+  const [products, setProducts] = useState(productsData);
 
   const deleteProduct = (productId) => {
-    const updatedProducts = _products.filter(
-      (product) => product.id !== +productId
+    const updatedProducts = products.filter(
+      (product) => product.id !== productId
     );
     setProducts(updatedProducts);
-    setProduct(null);
-  };
-
-  const selectProduct = (productId) => {
-    const selectedProduct = products.find(
-      (product) => product.id === productId
-    );
-    setProduct(selectedProduct);
   };
 
   const toggleTheme = () =>
     setCurrentTheme(currentTheme === "light" ? "dark" : "light");
 
-  const setView = () =>
-    product ? (
-      <ProductDetail
-        product={product}
-        deleteProduct={deleteProduct}
-        selectProduct={selectProduct}
-      />
-    ) : (
-      <ProductList
-        products={_products}
-        deleteProduct={deleteProduct}
-        selectProduct={selectProduct}
-      />
-    );
-
-    
-
   return (
     <ThemeProvider theme={theme[currentTheme]}>
-          <GlobalStyle />
-          <ThemeButton onClick={toggleTheme}>Dark Mode</ThemeButton>
+      <GlobalStyle />
+      <NavBar currentTheme={currentTheme} toggleTheme={toggleTheme} />
+      <Switch>
+        <Route exact path="/">
           <Home />
-          {setView()}
-        </ThemeProvider>
+        </Route>
+        <Route path="/products/:productSlug">
+          <ProductDetail products={products} deleteProduct={deleteProduct} />
+        </Route>
+        <Route path="/products">
+          <ProductList products={products} deleteProduct={deleteProduct} />
+        </Route>
+      </Switch>
+    </ThemeProvider>
   );
 }
 
 export default App;
+
+
+
+
 
 
 

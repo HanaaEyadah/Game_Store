@@ -1,6 +1,5 @@
-import { createGlobalStyle } from "styled-components";
-import styled from "styled-components";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
+import styled, { createGlobalStyle } from "styled-components";
 
 
 
@@ -48,10 +47,11 @@ export const ProductWrapper = styled.div`
 
 export const ShopImage = styled.img`
   display: block;
-  height:200px;
+  height:300px;
   margin-left: auto;
   margin-right: auto;
-  width: 50%;
+  width: 600px;
+  margin-bottom: 200px;
 `;
 
 export const NavStyled = styled.nav`
@@ -69,19 +69,14 @@ export const ThemeButton = styled.button`
 
 export const Title = styled.h1`
   text-align: center;
-`;
+ 
+ `;
 
 
 export const DeleteButtonStyled = styled.p`
   color: ${(props) => props.theme.red};
 `;
 
-export const Logo = styled(Link)`
-  padding: 0.75em;
-  img {
-    width: 8rem;
-  }
-`;
 
 export const DetailWrapper = styled.div`
   display: block;
@@ -94,5 +89,20 @@ export const DetailWrapper = styled.div`
   }
   p {
     vertical-align: middle;
+  }
+`;
+
+export const Logo = styled(Link)`
+  padding: 0.8em 0.5em;
+  img {
+    width: 80px;
+  }
+`;
+
+export const NavItem = styled(NavLink)`
+  color: ${(props) => props.theme.mainColor};
+  padding: 0.25em 1em;
+  &.active {
+    color: ${(props) => props.theme.pink};
   }
 `;

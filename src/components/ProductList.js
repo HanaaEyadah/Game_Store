@@ -2,10 +2,10 @@ import { ListWrapper } from "../styles";
 import ProductItem from "./ProductItem";
 import SearchBar from "./SearchBar";
 import { useState } from "react";
-import products from "../products";
 
 
-const Product = (props) => {
+
+const ProductList = (props) => {
   const [query, setQuery] = useState("");
 
   const productList = props.products
@@ -28,4 +28,4 @@ const Product = (props) => {
   );
 };
 
-export default Product;
+export default ProductList;
