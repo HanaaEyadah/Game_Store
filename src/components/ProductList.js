@@ -2,13 +2,15 @@ import { ListWrapper } from "../styles";
 import ProductItem from "./ProductItem";
 import SearchBar from "./SearchBar";
 import { useState } from "react";
+import productStore from "../Stores/productStore"
+import { observer } from "mobx-react";
 
 
 
-const ProductList = (props) => {
+const ProductList = () => {
   const [query, setQuery] = useState("");
 
-  const productList = props.products
+  const productList = productStore.products
     .filter((product) =>
       product.name.toLowerCase().includes(query.toLowerCase())
     )
@@ -16,8 +18,6 @@ const ProductList = (props) => {
       <ProductItem
         product={product}
         key={product.id}
-        deleteProduct={props.deleteProduct}
-        selectProduct={props.selectProduct}
       />
     ));
   return (
@@ -28,4 +28,4 @@ const ProductList = (props) => {
   );
 };
 
-export default ProductList;
+export default observer(ProductList);

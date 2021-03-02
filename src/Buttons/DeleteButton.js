@@ -1,8 +1,9 @@
 import { DeleteButtonStyled } from "../styles";
+import productStore from "../Stores/productStore"
 
-const DeleteButton = (props) => {
+const DeleteButton = ({productId}) => {
   return (
-    <DeleteButtonStyled onClick={() => props.deleteProduct(props.productId)}>
+    <DeleteButtonStyled onClick={() => productStore.deleteProduct(productId)}>
       Delete
     </DeleteButtonStyled>
   );

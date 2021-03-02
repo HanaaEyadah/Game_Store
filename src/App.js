@@ -6,7 +6,11 @@ import NavBar from "./components/NavBar";
 import ProductDetail from "./components/ProductDetails";
 import ProductList from "./components/ProductList";
 import { ThemeProvider } from "styled-components";
-import productsData from "./products";
+import { BsPlusCircle } from "react-icons/bs";
+
+
+
+
 
 const theme = {
         light: {
@@ -23,14 +27,6 @@ const theme = {
 
 function App() {
   const [currentTheme, setCurrentTheme] = useState("light");
-  const [products, setProducts] = useState(productsData);
-
-  const deleteProduct = (productId) => {
-    const updatedProducts = products.filter(
-      (product) => product.id !== productId
-    );
-    setProducts(updatedProducts);
-  };
 
   const toggleTheme = () =>
     setCurrentTheme(currentTheme === "light" ? "dark" : "light");
@@ -44,14 +40,16 @@ function App() {
           <Home />
         </Route>
         <Route path="/products/:productSlug">
-          <ProductDetail products={products} deleteProduct={deleteProduct} />
+          <ProductDetail  />
         </Route>
         <Route path="/products">
-          <ProductList products={products} deleteProduct={deleteProduct} />
+          <ProductList  />
         </Route>
       </Switch>
+    
     </ThemeProvider>
   );
+  
 }
 
 export default App;
