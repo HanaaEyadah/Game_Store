@@ -1,5 +1,6 @@
 import products from "../products"
 import { action, makeObservable, observable } from "mobx";
+import slugify from "react-slugify";
 import "../App"
 
 
@@ -15,8 +16,11 @@ class ProductStore{
   }
 
   createProduct = (newProduct) => {
-      //my code
-  }
+    newProduct.id = this.products[this.products.length - 1].id + 1;
+    newProduct.slug = slugify(newProduct.name);
+    this.products.push(newProduct);
+    console.log("productStore -> createProduct -> this.products", this.products);
+  };
   
   deleteProduct = (productId) => {
         this.products = this.products.filter((product) => product.id !== productId);

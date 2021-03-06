@@ -112,3 +112,19 @@ export const NavItem = styled(NavLink)`
     color: ${(props) => props.theme.pink};
   }
 `;
+
+
+
+export const CreateButtonStyled = styled.button`
+font-size: 1em;
+  margin: 1.25em;
+  padding: 0.25em 1em;
+  border-radius: 3px;
+  color: ${(props) => props.theme.backgroundColor};
+  background-color: ${(props) => props.theme.mainColor};
+
+  &:hover {
+    color: ${(props) => props.theme.mainColor};
+    background-color: ${(props) => props.theme.backgroundColor};
+  }
+`;

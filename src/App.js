@@ -6,8 +6,6 @@ import NavBar from "./components/NavBar";
 import ProductDetail from "./components/ProductDetails";
 import ProductList from "./components/ProductList";
 import { ThemeProvider } from "styled-components";
-import { BsPlusCircle } from "react-icons/bs";
-
 
 
 
@@ -31,6 +29,8 @@ function App() {
   const toggleTheme = () =>
     setCurrentTheme(currentTheme === "light" ? "dark" : "light");
 
+ 
+
   return (
     <ThemeProvider theme={theme[currentTheme]}>
       <GlobalStyle />
@@ -43,7 +43,7 @@ function App() {
           <ProductDetail  />
         </Route>
         <Route path="/products">
-          <ProductList  />
+        <ProductList/>
         </Route>
       </Switch>
     

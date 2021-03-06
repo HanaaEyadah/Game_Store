@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { ProductWrapper } from "../styles";
 
 
+
 const ProductItem = ({product} ) => {
   return (
     <ProductWrapper>
@@ -12,9 +13,10 @@ const ProductItem = ({product} ) => {
       <p>{product.name}</p>
       <p className="product-price">{product.price} KD</p>
       <DeleteButton productId={product.id}  />
-  
     </ProductWrapper>
+
   );
+
  
 };
 
