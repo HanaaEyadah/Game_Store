@@ -7,11 +7,12 @@ import productStore from "../Stores/productStore"
 
 function AddButton(productId){
     const [isOpen , setIsOpen]=  useState(false);
-    const closeModal =() => isOpen(false);
+    const closeModal =() => setIsOpen(false);
     const openModal = () => setIsOpen(true);
     return(
 <>
-<CreateButtonStyled className="float-right" size="2em" onClick={openModal} />
+<CreateButtonStyled  onClick={openModal} />
+  
 
   <ProductModal isOpen={isOpen} closeModal={closeModal} />
 </>
