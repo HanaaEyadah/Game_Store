@@ -15,25 +15,25 @@ class AuthStore {
     try {
         // const res = await instance.post("/signup", userData);
         // this.setUser(res.data.token);
-        const res = await axios.post("http://localhost:8000/signup", userData)
+        const res = await axios.post("http://localhost:8000/signup", userData);
         this.user= res.data;
-        // console.log("user =>", this.user);
+        console.log("user =>", this.user);
       } catch (error) {
       console.log("AuthStore -> signup -> error", error);
     }
   };
 
-  // signin = async (userData) => {
-  //   try {
-  //     const res = await axios.post("http://localhost:8000/signin", userData)
-  //       // const res = await instance.post("/signin", userData);
-  //       // this.setUser(res.data.token);
-  //       this.user = res.data;
-  //       // console.log("user token =>", this.user)
-  //     } catch (error) {
-  //     console.log("AuthStore -> signin -> error", error);
-  //   }
-  // };
+  signin = async (userData) => {
+    try {
+      const res = await axios.post("http://localhost:8000/signin", userData)
+        // const res = await instance.post("/signin", userData);
+        // this.setUser(res.data.token);
+        this.user = res.data;
+        // console.log("user token =>", this.user)
+      } catch (error) {
+      console.log("AuthStore -> signin -> error", error);
+    }
+  };
 
 //   setUser = (token) => {
 //     instance.defaults.headers.common.Authorization = `Bearer ${token}`;
