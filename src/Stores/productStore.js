@@ -1,32 +1,50 @@
-import products from "../products"
-import { action, makeObservable, observable } from "mobx";
+import { makeAutoObservable } from "mobx";
 import slugify from "react-slugify";
 import "../App"
-
+import axios from "axios";
 
 class ProductStore{
-    products = products;
+    products = [];
+    // loading = true;
 
     constructor() {
-    makeObservable(this, {
-     products: observable,
-     createProduct: action,
-     deleteProduct: action,
-});
-  }
+      makeAutoObservable(this);
+    }
 
-  createProduct = (newProduct) => {
-    newProduct.id = this.products[this.products.length - 1].id + 1;
-    newProduct.slug = slugify(newProduct.name);
-    this.products.push(newProduct);
-    console.log("productStore -> createProduct -> this.products", this.products);
-  };
+
+    createProduct = async (newProduct) => {
+      try {
+        const res = await axios.post("http://localhost:8000/products", newProduct);
+        res.data.product = { id: newProduct.productId };
+        this.products.push(res.data);
+        console.log("ProductStore -> createProduct -> this.products", this.products);
+      } catch (error) {
+        console.error("ProductStore -> createProduct -> error", error);
+      }
+    };
   
-  deleteProduct = (productId) => {
+  deleteProduct = async (productId) => {
+    try {
+      await axios.delete(`http://localhost:8000/products/${productId}`);
         this.products = this.products.filter((product) => product.id !== productId);
-      };
+      }catch (error) {
+        console.error("ProductStore -> createProduct -> error", error);
+      }
   };
+  fetchProducts = async () => {
+    try {
+      const res = await axios.get("http://localhost:8000/products");
+      this.products = res.data;
+      // this.loading = false;
+      console.log(res.data);
+    } catch (error) {
+      console.error("ProductStore -> fetchProducts -> error", error);
+    }
+  };
+}
+
 
 
 const productStore = new ProductStore();
+productStore.fetchProducts();
 export default productStore;

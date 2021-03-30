@@ -5,13 +5,21 @@ import { useState } from "react";
 import productStore from "../Stores/productStore"
 import { observer } from "mobx-react";
 import AddButton from "../Buttons/AddButton";
-
+import PacmanLoader from "react-spinners/PacmanLoader";
+import authStore from "../Stores/authStore";
 
 
 
 const ProductList = ({ products, createProduct, deleteProduct, product }) => {
   const [query, setQuery] = useState("");
-
+  // if (productStore.loading)
+  // return (
+  //   <PacmanLoader
+  //     color={"purple"}
+  //     size={75}
+  //     css={{ width: "260px !important", height: "130px !important" }}
+  //   />
+  // );
   const productList = productStore.products
     .filter((product) =>
       product.name.toLowerCase().includes(query.toLowerCase())
@@ -26,13 +34,8 @@ const ProductList = ({ products, createProduct, deleteProduct, product }) => {
     <div>
       <SearchBar setQuery={setQuery} />
       <ListWrapper>{productList}</ListWrapper>
-      {/* <BsPlusCircle className="float-right" size="2em" onClick={openModal} /> */}
-      {/* <ProductModal
-  isOpen={isOpen}
-  closeModal={closeModal}
-  createProduct={createProduct}
-/> */}
-      <AddButton />
+      { authStore.user && <AddButton product={product} />}
+      {/* <AddButton /> */}
       
     </div>
   );

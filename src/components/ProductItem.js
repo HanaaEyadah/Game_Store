@@ -1,7 +1,7 @@
 import DeleteButton from "../Buttons/DeleteButton";
 import { Link } from "react-router-dom";
 import { ProductWrapper } from "../styles";
-
+import { observer } from "mobx-react";
 
 
 const ProductItem = ({product} ) => {
@@ -20,7 +20,7 @@ const ProductItem = ({product} ) => {
  
 };
 
-export default ProductItem;
+export default observer(ProductItem);
 
 
 
