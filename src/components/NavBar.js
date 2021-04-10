@@ -20,12 +20,15 @@ const NavBar = ({ currentTheme, toggleTheme }) => {
         <NavItem className="nav-item" to="/products">
           Products
         </NavItem>
-        {authStore.user? (
-        <h3>Hello {authStore.user.username}</h3>
-        ): ( 
-        <SignupButton />
-        )}
-        <SigninButton />
+        {authStore.user ? (
+    <p>Hello, {authStore.user.username}</p>
+  ) : (
+    <>
+      <SigninButton />
+      <SignupButton />
+    </>
+  )
+}
         <ThemeButton className="nav-item" onClick={toggleTheme}>
           {currentTheme === "light" ? "Dark" : "Light"} Mode
         </ThemeButton>

@@ -24,6 +24,7 @@ const SigninModal = ({ closeModal, isOpen }) => {
   const handleChange = (event) =>
     setUser({ ...user, [event.target.name]: event.target.value });
 
+
     const handleSubmit = (event) => {
         event.preventDefault();
         authStore.signin(user);

@@ -2,6 +2,8 @@ import { useState } from "react";
 import Modal from "react-modal";
 import { CreateButtonStyled } from "../styles";
 import authStore from "../Stores/authStore";
+import { observer } from "mobx-react";
+
 
 const customStyles = {
   content: {
@@ -22,10 +24,22 @@ const Signup = ({ closeModal, isOpen }) => {
       password: "",
       email: "",
     });
-  
-    const handleChange = (event) =>
+  const [usernamemsg, setUsernamemsg]= useState("");
+    const [passwordmsg, setPasswordmsg]= useState("");
+    const handleChange = (event) =>{
       setUser({ ...user, [event.target.name]: event.target.value });
       
+      
+         // chheck username
+         if (event.target.name === "username"){
+          authStore.checkUsername(user.username);
+        }
+      // chheck password
+      // if (event.target.name === "password"){
+      //   if(event.target.value === "") setPasswordmsg("");
+      //   else checkPasswordStrenth(event.target.value);
+      // }
+}
   
       const handleSubmit = (event) => {
         event.preventDefault();
@@ -52,6 +66,7 @@ const Signup = ({ closeModal, isOpen }) => {
               onChange={handleChange}
             />
           </div>
+          <label>{authStore.checkUsername.message}</label>
           <div className="form-group row">
             <div className="col-6">
               <label>First Name</label>
@@ -94,6 +109,7 @@ const Signup = ({ closeModal, isOpen }) => {
               onChange={handleChange}
             />
           </div>
+          <label>{passwordmsg}</label>
           <CreateButtonStyled className="btn float-right" type="submit">
             Sign up
           </CreateButtonStyled>
@@ -102,4 +118,4 @@ const Signup = ({ closeModal, isOpen }) => {
     );
   };
   
-  export default Signup;
+  export default observer(Signup);
